@@ -1,0 +1,70 @@
+    {
+    "functionInvocationValue": {
+        "arguments": {
+        "image": {
+            "functionInvocationValue": {
+            "arguments": {
+                "image1": {
+                "functionInvocationValue": {
+                    "arguments": {
+                    "image1": {
+                        "functionInvocationValue": {
+                        "arguments": {
+                            "collection": {
+                            "functionInvocationValue": {
+                                "arguments": {
+                                "collection": {
+                                    "functionInvocationValue": {
+                                    "arguments": {
+                                        "id": { "constantValue": "MODIS/006/MOD11A1" }
+                                    },
+                                    "functionName": "ImageCollection.load"
+                                    }
+                                },
+                                "baseAlgorithm": {
+                                    "functionDefinitionValue": {
+                                    "argumentNames": ["_MAPPING_VAR_0_0"],
+                                    "body": "1"
+                                    }
+                                }
+                                },
+                                "functionName": "Collection.map"
+                            }
+                            }
+                        },
+                        "functionName": "Collection.first"
+                        }
+                    },
+                    "image2": {
+                        "functionInvocationValue": {
+                        "arguments": {
+                            "value": { "constantValue": 0.02 }
+                        },
+                        "functionName": "Image.constant"
+                        }
+                    }
+                    },
+                    "functionName": "Image.multiply"
+                }
+                },
+                "image2": {
+                "functionInvocationValue": {
+                    "arguments": {
+                    "value": { "constantValue": 273.15 }
+                    },
+                    "functionName": "Image.constant"
+                }
+                }
+            },
+            "functionName": "Image.subtract"
+            }
+        },
+        "min": { "constantValue": 20 },
+        "max": { "constantValue": 45 },
+        "palette": {
+            "constantValue": ["blue", "cyan", "green", "yellow", "orange", "red"]
+        }
+        },
+        "functionName": "Image.visualize"
+    }
+    }

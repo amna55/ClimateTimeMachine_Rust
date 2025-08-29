@@ -1,0 +1,105 @@
+mod api;
+mod models;
+mod scheduler;
+mod services;
+mod utils;
+
+use tokio::net::TcpListener;
+use axum::serve;
+use tower_http::cors::{CorsLayer, Any};
+use std::net::SocketAddr;
+use std::sync::Arc;
+use crate::scheduler::heat_alert_scheduler::{HeatAlertCache, run_scheduler};
+use tokio::spawn;
+
+#[tokio::main]
+async fn main() {
+    let cors = CorsLayer::new()
+        .allow_origin("http://localhost:8080".parse::<axum::http::HeaderValue>().unwrap())
+        .allow_methods([axum::http::Method::GET, axum::http::Method::POST])
+        .allow_headers(Any);
+
+    // Initialize shared cache
+    let cache = Arc::new(HeatAlertCache::new());
+
+    // Spawn scheduler task to update cache every 6 hours
+    {
+        let cache_clone = cache.clone();
+        spawn(async move {
+            run_scheduler(cache_clone).await;
+        });
+    }
+
+    // Pass the cache to the API router
+    let app = api::routes(cache)
+        .layer(cors);
+
+    let addr: SocketAddr = "127.0.0.1:3000".parse().unwrap();
+    let listener = TcpListener::bind(addr)
+        .await
+        .expect("Failed to bind address");
+
+    println!("Server running at http://{}", listener.local_addr().unwrap());
+
+    serve(listener, app.into_make_service())
+        .await
+        .unwrap();
+}
+
+
+// src/main.rs
+mod api;
+mod models;
+mod scheduler;
+mod services;
+mod utils;
+
+use tokio::net::TcpListener;
+use axum::serve;
+use tower_http::cors::{CorsLayer, Any};
+use std::net::SocketAddr;
+use std::sync::Arc;
+use crate::scheduler::heat_alert_scheduler::{HeatAlertCache, run_scheduler};
+use tokio::spawn;
+use crate::services::earthengine::EarthEngineService;
+
+#[tokio::main]
+async fn main() {
+    // Configure CORS
+    let cors = CorsLayer::new()
+        .allow_origin("http://localhost:8080".parse::<axum::http::HeaderValue>().unwrap())
+        .allow_methods([axum::http::Method::GET, axum::http::Method::POST])
+        .allow_headers(Any);
+
+    // Initialize shared cache
+    let cache = Arc::new(HeatAlertCache::new());
+
+    // Initialize Earth Engine service
+    let earth_engine_service = Arc::new(EarthEngineService::new(
+        "http://localhost:8000".to_string()
+    ));
+
+    // Spawn scheduler task
+    {
+        let cache_clone = cache.clone();
+        spawn(async move {
+            run_scheduler(cache_clone).await;
+        });
+    }
+
+    // Create app with both services
+    let app = api::routes(cache.clone(), earth_engine_service.clone()) // pass Arc clones
+        .layer(cors);
+
+    let addr: SocketAddr = "127.0.0.1:3000".parse().unwrap();
+    let listener = TcpListener::bind(addr)
+        .await
+        .expect("Failed to bind address");
+
+    println!("Server running at http://{}", listener.local_addr().unwrap());
+
+    serve(listener, app.into_make_service())
+        .await
+        .unwrap();
+}
+

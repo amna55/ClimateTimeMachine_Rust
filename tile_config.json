@@ -1,0 +1,10 @@
+{
+  "lst_tile_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/03e29b09e6682752f2bf5df04d0a6768-73a2670fca4f664212d017889921346f/tiles/{z}/{x}/{y}",
+  "anomaly_tile_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/c2a71db83357d6f5135afcc78ec94ca3-32498e4d00f430fa93fff9fd6e335a8d/tiles/{z}/{x}/{y}",
+  "absolute_anomaly_tile_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/1b43aef8d9d5934abd4579dcc782359f-5b928375b772c9159011e540def74112/tiles/{z}/{x}/{y}",
+  "generated_at": "2025-08-20T13:54:35.794394",
+  "target_period": "2020-05",
+  "climatology_period": "2002-2022",
+  "data_source": "MODIS/006/MOD11A1",
+  "description": "Land Surface Temperature and Anomalies - Global"
+}

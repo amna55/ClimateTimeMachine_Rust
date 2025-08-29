@@ -1,0 +1,5 @@
+{
+  "lst_tile_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/3e64b84795909b0fd57a58e46a4704d3-596cad5be61c47de2464efd30c86bb42/tiles/{z}/{x}/{y}",
+  "anomaly_tile_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/69c0cfa80bae8ded71ff55f252863efb-d6236e2288333200f510c7914a4c302b/tiles/{z}/{x}/{y}",
+  "absolute_anomaly_tile_url": "https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/dfaa7a0d7c11372c14a2e34e413cc0b8-cce0d48aa64f342bf834cc73d7334db2/tiles/{z}/{x}/{y}"
+}
