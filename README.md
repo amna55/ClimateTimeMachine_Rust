@@ -42,10 +42,6 @@ It provides APIs and data processing utilities for handling climate and temperat
 It should only exist on your local machine or deployment server.
 Add it to your .gitignore (already included).
 
-4. **Run the backend**
-'''cargo run
-
-By default, the backend will start a local server (check src/main.rs for config).
 
 ## Security Notes
 
