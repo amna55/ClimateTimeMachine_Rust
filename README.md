@@ -28,9 +28,10 @@ It provides APIs and data processing utilities for handling climate and temperat
    git clone https://github.com/amna55/ClimateTimeMachine_Rust.git
    cd ClimateTimeMachine_Rust
 2. **Install dependencies**
+   '''cargo build
 Rust dependencies are managed with Cargo. To fetch and build:
-'''cargo build
-3. **Create service_account.json**
+
+4. **Create service_account.json**
 Go to Google Cloud Console
 Create a Service Account and download the credentials as a JSON file.
 Save it in the root of this project as:
